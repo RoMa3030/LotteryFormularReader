@@ -111,6 +111,7 @@
             tbl_GuessList.Columns.AddRange(new DataGridViewColumn[] { Name, Place, GuessVal });
             tbl_GuessList.Location = new Point(12, 128);
             tbl_GuessList.Name = "tbl_GuessList";
+            tbl_GuessList.RowHeadersVisible = false;
             tbl_GuessList.RowHeadersWidth = 51;
             tbl_GuessList.Size = new Size(776, 188);
             tbl_GuessList.TabIndex = 6;
@@ -150,7 +151,7 @@
             Controls.Add(bt_SelPic);
             Controls.Add(button1);
             Controls.Add(txt_Output);
-            Name = "MainScreen";
+            Name.Name = "MainScreen";
             Text = "Lottery Formular Reader";
             ((System.ComponentModel.ISupportInitialize)tbl_GuessList).EndInit();
             ResumeLayout(false);

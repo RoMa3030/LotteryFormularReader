@@ -35,6 +35,6 @@ while(True):
 import sys
 
 if __name__ == '__main__':
-    print("Roger Mattle,Montlingen,567")
+    print("Roger Mattle,Montlingen,567;Max Muster,Musterdorf,876;Tom Müller,Kriessern,123;Kevin Haltiner,Oberriet,852;")
     sys.stdout.flush()
     #sys.exit(123)

@@ -26,7 +26,14 @@ namespace LotteryFormularReader
             string path = PicPath_UserSelect();
             if (path != "ERROR")
             {
-
+                // On valid selection run python code and write results in table
+                string ResultString = RunPythonTestScript();
+                List<GuessEntry> Guesses = EntriesParser(ResultString);
+                StoreResultInTable(Guesses);
+            }
+            else
+            {
+                MessageBox.Show("An error occurred!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         #endregion
@@ -75,5 +82,79 @@ namespace LotteryFormularReader
             return "ERROR";
         }
 
+        private void StoreResultInTable(List<GuessEntry> Guesses)
+        {
+            foreach(GuessEntry entry in Guesses)
+            {
+                int rows = tbl_GuessList.RowCount;
+                tbl_GuessList.Rows.Add(rows);
+                tbl_GuessList.Rows[rows].Cells[0].Value = entry.Name;
+                tbl_GuessList.Rows[rows].Cells[1].Value = entry.Town;
+                tbl_GuessList.Rows[rows].Cells[2].Value = entry.GuessVal;
+            }
+
+        }
+
+
+        List<GuessEntry> EntriesParser(string result)
+        {
+            List<GuessEntry> Guesses = new List<GuessEntry>();
+            GuessEntry cacheGuess = new GuessEntry();
+            string cache = "";
+            int count = 0;
+            foreach (char c in result)
+            {
+                switch (c)
+                {
+                    case ',':
+                        // One field of the entry is complete
+                        switch (count)
+                        {
+                            case 0:
+                                cacheGuess.Name = cache;
+                                break;
+                            case 1:
+                                cacheGuess.Town = cache;
+                                break;
+                        }
+                        cache = "";
+                        count++;
+                        break;
+                    case ';':
+                        //One guess is read completely
+                        cacheGuess.GuessVal = cache;
+                        Guesses.Add( cacheGuess.deepCopy() );
+                        count = 0;
+                        cache = "";
+                        break;
+                    case '\r':
+                        result = "";
+                        break;
+                    default:
+                        // just a further character in the string
+                        cache = cache + c;
+                        break;
+                }
+            }
+            return Guesses;
+        }
+    }
+
+    class GuessEntry
+    {
+        public string Name = "";
+        public string Town = "";
+        public string GuessVal ="";
+
+        public GuessEntry deepCopy()
+        {
+            GuessEntry newGuess = new GuessEntry
+            {
+                Name = this.Name,
+                Town = this.Town,
+                GuessVal = this.GuessVal
+            };
+            return newGuess;
+        }
     }
 }
