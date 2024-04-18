@@ -1,0 +1,16 @@
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\bin\Debug\net8.0-windows\LotteryFormularReader.exe
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\bin\Debug\net8.0-windows\LotteryFormularReader.deps.json
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\bin\Debug\net8.0-windows\LotteryFormularReader.runtimeconfig.json
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\bin\Debug\net8.0-windows\LotteryFormularReader.dll
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\bin\Debug\net8.0-windows\LotteryFormularReader.pdb
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.MainScreen.resources
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.csproj.GenerateResource.cache
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.GeneratedMSBuildEditorConfig.editorconfig
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.AssemblyInfoInputs.cache
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.AssemblyInfo.cs
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.csproj.CoreCompileInputs.cache
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.dll
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\refint\LotteryFormularReader.dll
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.pdb
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.genruntimeconfig.cache
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\ref\LotteryFormularReader.dll
