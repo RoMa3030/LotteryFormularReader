@@ -18,7 +18,7 @@ namespace LotteryFormularReader
             result = RunPythonTestScript();
 
             // Write return string to textfield
-            txt_Output.Text = result;
+            //txt_Output.Text = result;
         }
 
         private void bt_SelPic_Click(object sender, EventArgs e)
@@ -84,13 +84,14 @@ namespace LotteryFormularReader
 
         private void StoreResultInTable(List<GuessEntry> Guesses)
         {
-            foreach(GuessEntry entry in Guesses)
+            int rows = tbl_GuessList.RowCount - 1;
+            tbl_GuessList.Rows.Add(Guesses.Count());
+            foreach (GuessEntry entry in Guesses)
             {
-                int rows = tbl_GuessList.RowCount;
-                tbl_GuessList.Rows.Add(rows);
                 tbl_GuessList.Rows[rows].Cells[0].Value = entry.Name;
                 tbl_GuessList.Rows[rows].Cells[1].Value = entry.Town;
                 tbl_GuessList.Rows[rows].Cells[2].Value = entry.GuessVal;
+                rows++;
             }
 
         }
@@ -123,7 +124,7 @@ namespace LotteryFormularReader
                     case ';':
                         //One guess is read completely
                         cacheGuess.GuessVal = cache;
-                        Guesses.Add( cacheGuess.deepCopy() );
+                        Guesses.Add(cacheGuess.deepCopy());
                         count = 0;
                         cache = "";
                         break;
@@ -137,6 +138,21 @@ namespace LotteryFormularReader
                 }
             }
             return Guesses;
+        }
+
+        private void bt_SelFolder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tbl_GuessList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 
