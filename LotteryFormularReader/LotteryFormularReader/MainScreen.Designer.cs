@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            button1 = new Button();
             bt_SelPic = new Button();
             bt_SelFolder = new Button();
             bt_ShootPic = new Button();
@@ -47,16 +46,6 @@
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(640, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(148, 29);
-            button1.TabIndex = 1;
-            button1.Text = "Python Test";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // bt_SelPic
             // 
@@ -119,7 +108,6 @@
             tbl_GuessList.ScrollBars = ScrollBars.Vertical;
             tbl_GuessList.Size = new Size(832, 308);
             tbl_GuessList.TabIndex = 6;
-            tbl_GuessList.CellContentClick += tbl_GuessList_CellContentClick;
             // 
             // Name
             // 
@@ -168,10 +156,8 @@
             // 
             splitContainer1.Panel1.Controls.Add(bt_SelPic);
             splitContainer1.Panel1.Controls.Add(bt_Export);
-            splitContainer1.Panel1.Controls.Add(button1);
             splitContainer1.Panel1.Controls.Add(bt_SelFolder);
             splitContainer1.Panel1.Controls.Add(bt_ShootPic);
-            splitContainer1.Panel1.Paint += splitContainer1_Panel1_Paint;
             splitContainer1.Panel1MinSize = 0;
             // 
             // splitContainer1.Panel2
@@ -201,7 +187,6 @@
         }
 
         #endregion
-        private Button button1;
         private Button bt_SelPic;
         private Button bt_SelFolder;
         private Button bt_ShootPic;

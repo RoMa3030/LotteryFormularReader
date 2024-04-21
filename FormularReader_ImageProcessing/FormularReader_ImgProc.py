@@ -35,6 +35,23 @@ while(True):
 import sys
 
 if __name__ == '__main__':
-    print("Roger Mattle,Montlingen,567;Max Muster,Musterdorf,876;Tom Müller,Kriessern,123;Kevin Haltiner,Oberriet,852;")
+    if len(sys.argv) < 2:
+            print("Error: Picture path")
+            sys.exit(1)
+            
+    picture_path = sys.argv[1]
+
+    #print("Directory from C#:", picture_path, ",,;")
+    print("Roger Mattle,Montlingen,567;")#Max Muster,Musterdorf,876;Tom Müller,Kriessern,123;Kevin Haltiner,Oberriet,852;")
     sys.stdout.flush()
     #sys.exit(123)
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

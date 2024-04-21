@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.IO;
 
 namespace LotteryFormularReader
 {
@@ -10,44 +11,46 @@ namespace LotteryFormularReader
         }
 
         #region Buttons
-        private void button1_Click(object sender, EventArgs e)
-        {
-            string result = "did not work";
-            // Start Python Script
-            result = RunPythonTestScript();
-
-            // Write return string to textfield
-            //txt_Output.Text = result;
-        }
-
         private void bt_SelPic_Click(object sender, EventArgs e)
         {
             string path = PicPath_UserSelect();
             if (path != "ERROR")
             {
-                // On valid selection run python code and write results in table
-                string ResultString = RunPythonTestScript();
-                List<GuessEntry> Guesses = EntriesParser(ResultString);
-                WriteResultsInTable(Guesses);
+                ProcessPicture(path);
             }
             else
             {
                 MessageBox.Show("An error occurred!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        private void bt_SelFolder_Click(object sender, EventArgs e)
+        {
+            FolderPath_UserSelect();
+        }
         #endregion
 
-        private string RunPythonTestScript()
+
+        private void ProcessPicture(string arg = "")
         {
-            // Specify the path to the Python interpreter and the Python script to execute
+            // On valid selection run python code and write results in table
+            string ResultString = RunPythonScript(arg);
+            List<GuessEntry> Guesses = EntriesParser(ResultString);
+            WriteResultsInTable(Guesses);
+        }
+
+        private string RunPythonScript(string arg = "")
+        {
             string pythonInterpreter = "python";
             //ToDo: Adapt to relative path
             string pythonScript = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ImgProc.py";
+            //string pythonScript = "\\..\\..\\..\\..\\..\\FormularReader_ImageProcessing\\FormularReader_ImgProc.py";
 
             // Create a ProcessStartInfo object to configure the process
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = pythonInterpreter;         // Set the filename (Python interpreter)
-            startInfo.Arguments = pythonScript;             // Set the arguments (Python script)
+            //startInfo.Arguments = pythonScript;             // Set the arguments (Python script)
+            startInfo.Arguments = $"\"{pythonScript}\" \"{arg}\"";
             startInfo.UseShellExecute = false;              // Ensure that we can redirect input/output
             startInfo.RedirectStandardOutput = true;        // Redirect standard output
             startInfo.RedirectStandardError = true; //GPT
@@ -81,6 +84,30 @@ namespace LotteryFormularReader
             return "ERROR";
         }
 
+        private void FolderPath_UserSelect()
+        {
+            // Show folder browser dialog to select a folder
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            DialogResult result = folderBrowserDialog.ShowDialog();
+
+            if (result == DialogResult.OK)
+            {
+                // Get the selected folder path
+                string selectedFolderPath = folderBrowserDialog.SelectedPath;
+
+                // Iterate through all .png files in the selected folder
+                string[] pngFiles = Directory.GetFiles(selectedFolderPath, "*.png");
+                foreach (string pngFile in pngFiles)
+                {
+                    ProcessPicture(pngFile);
+                }
+            }
+            else
+            {
+                MessageBox.Show("An error occurred!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         private void WriteResultsInTable(List<GuessEntry> Guesses)
         {
             int rows = tbl_GuessList.RowCount;
@@ -92,9 +119,7 @@ namespace LotteryFormularReader
                 tbl_GuessList.Rows[rows].Cells[2].Value = entry.GuessVal;
                 rows++;
             }
-
         }
-
 
         List<GuessEntry> EntriesParser(string result)
         {
@@ -137,21 +162,6 @@ namespace LotteryFormularReader
                 }
             }
             return Guesses;
-        }
-
-        private void bt_SelFolder_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void tbl_GuessList_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 
