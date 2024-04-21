@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Xml.Serialization;
 
 namespace LotteryFormularReader
 {
@@ -29,7 +28,7 @@ namespace LotteryFormularReader
                 // On valid selection run python code and write results in table
                 string ResultString = RunPythonTestScript();
                 List<GuessEntry> Guesses = EntriesParser(ResultString);
-                StoreResultInTable(Guesses);
+                WriteResultsInTable(Guesses);
             }
             else
             {
@@ -82,9 +81,9 @@ namespace LotteryFormularReader
             return "ERROR";
         }
 
-        private void StoreResultInTable(List<GuessEntry> Guesses)
+        private void WriteResultsInTable(List<GuessEntry> Guesses)
         {
-            int rows = tbl_GuessList.RowCount - 1;
+            int rows = tbl_GuessList.RowCount;
             tbl_GuessList.Rows.Add(Guesses.Count());
             foreach (GuessEntry entry in Guesses)
             {
