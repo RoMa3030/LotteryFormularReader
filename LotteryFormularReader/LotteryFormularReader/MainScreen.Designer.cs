@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             bt_SelPic = new Button();
             bt_SelFolder = new Button();
@@ -37,14 +38,21 @@
             Name = new DataGridViewTextBoxColumn();
             Place = new DataGridViewTextBoxColumn();
             GuessVal = new DataGridViewTextBoxColumn();
-            panel1 = new Panel();
+            panel_Buttons = new Panel();
             splitContainer1 = new SplitContainer();
+            lb_CellEdit = new Label();
+            txt_Edit = new TextBox();
+            bt_Clear = new Button();
+            ctm_CellActions = new ContextMenuStrip(components);
+            editToolStripMenuItem = new ToolStripMenuItem();
+            deleteToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)tbl_GuessList).BeginInit();
-            panel1.SuspendLayout();
+            panel_Buttons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
             splitContainer1.Panel1.SuspendLayout();
             splitContainer1.Panel2.SuspendLayout();
             splitContainer1.SuspendLayout();
+            ctm_CellActions.SuspendLayout();
             SuspendLayout();
             // 
             // bt_SelPic
@@ -75,15 +83,17 @@
             bt_ShootPic.TabIndex = 4;
             bt_ShootPic.Text = "Shoot Picture";
             bt_ShootPic.UseVisualStyleBackColor = true;
+            bt_ShootPic.Click += bt_ShootPic_Click;
             // 
             // bt_Export
             // 
-            bt_Export.Location = new Point(15, 60);
+            bt_Export.Location = new Point(15, 77);
             bt_Export.Name = "bt_Export";
             bt_Export.Size = new Size(148, 29);
             bt_Export.TabIndex = 5;
             bt_Export.Text = "Export List";
             bt_Export.UseVisualStyleBackColor = true;
+            bt_Export.Click += bt_Export_Click;
             // 
             // tbl_GuessList
             // 
@@ -97,7 +107,8 @@
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             tbl_GuessList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            tbl_GuessList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            tbl_GuessList.ColumnHeadersHeight = 29;
+            tbl_GuessList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             tbl_GuessList.Columns.AddRange(new DataGridViewColumn[] { Name, Place, GuessVal });
             tbl_GuessList.Dock = DockStyle.Fill;
             tbl_GuessList.Location = new Point(0, 0);
@@ -108,6 +119,7 @@
             tbl_GuessList.ScrollBars = ScrollBars.Vertical;
             tbl_GuessList.Size = new Size(832, 308);
             tbl_GuessList.TabIndex = 6;
+            tbl_GuessList.CellMouseDown += tbl_GuessList_CellMouseDown;
             // 
             // Name
             // 
@@ -135,14 +147,14 @@
             GuessVal.Name = "GuessVal";
             GuessVal.ReadOnly = true;
             // 
-            // panel1
+            // panel_Buttons
             // 
-            panel1.Controls.Add(splitContainer1);
-            panel1.Dock = DockStyle.Fill;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(832, 433);
-            panel1.TabIndex = 7;
+            panel_Buttons.Controls.Add(splitContainer1);
+            panel_Buttons.Dock = DockStyle.Fill;
+            panel_Buttons.Location = new Point(0, 0);
+            panel_Buttons.Name = "panel_Buttons";
+            panel_Buttons.Size = new Size(832, 433);
+            panel_Buttons.TabIndex = 7;
             // 
             // splitContainer1
             // 
@@ -154,6 +166,9 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(lb_CellEdit);
+            splitContainer1.Panel1.Controls.Add(txt_Edit);
+            splitContainer1.Panel1.Controls.Add(bt_Clear);
             splitContainer1.Panel1.Controls.Add(bt_SelPic);
             splitContainer1.Panel1.Controls.Add(bt_Export);
             splitContainer1.Panel1.Controls.Add(bt_SelFolder);
@@ -168,21 +183,77 @@
             splitContainer1.SplitterDistance = 121;
             splitContainer1.TabIndex = 6;
             // 
+            // lb_CellEdit
+            // 
+            lb_CellEdit.AutoSize = true;
+            lb_CellEdit.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lb_CellEdit.ForeColor = Color.Red;
+            lb_CellEdit.Location = new Point(445, 56);
+            lb_CellEdit.Name = "lb_CellEdit";
+            lb_CellEdit.Size = new Size(86, 20);
+            lb_CellEdit.TabIndex = 9;
+            lb_CellEdit.Text = "Correction:";
+            lb_CellEdit.Visible = false;
+            // 
+            // txt_Edit
+            // 
+            txt_Edit.BackColor = Color.FromArgb(255, 192, 192);
+            txt_Edit.Location = new Point(445, 79);
+            txt_Edit.Name = "txt_Edit";
+            txt_Edit.Size = new Size(303, 27);
+            txt_Edit.TabIndex = 8;
+            txt_Edit.Visible = false;
+            txt_Edit.KeyDown += txt_Edit_KeyDown;
+            // 
+            // bt_Clear
+            // 
+            bt_Clear.Location = new Point(186, 77);
+            bt_Clear.Name = "bt_Clear";
+            bt_Clear.Size = new Size(148, 29);
+            bt_Clear.TabIndex = 6;
+            bt_Clear.Text = "Clear List";
+            bt_Clear.UseVisualStyleBackColor = true;
+            bt_Clear.Click += bt_Clear_Click;
+            // 
+            // ctm_CellActions
+            // 
+            ctm_CellActions.ImageScalingSize = new Size(20, 20);
+            ctm_CellActions.Items.AddRange(new ToolStripItem[] { editToolStripMenuItem, deleteToolStripMenuItem });
+            ctm_CellActions.Name = "ctm_CellActions";
+            ctm_CellActions.Size = new Size(123, 52);
+            // 
+            // editToolStripMenuItem
+            // 
+            editToolStripMenuItem.Name = "editToolStripMenuItem";
+            editToolStripMenuItem.Size = new Size(122, 24);
+            editToolStripMenuItem.Text = "Edit";
+            editToolStripMenuItem.Click += editToolStripMenuItem_Click;
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(122, 24);
+            deleteToolStripMenuItem.Text = "Delete";
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
+            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(832, 433);
-            Controls.Add(panel1);
+            Controls.Add(panel_Buttons);
             MinimumSize = new Size(540, 380);
             Name.Name = "MainScreen";
             Text = "Lottery Formular Reader";
+            KeyPress += MainScreen_KeyPress;
             ((System.ComponentModel.ISupportInitialize)tbl_GuessList).EndInit();
-            panel1.ResumeLayout(false);
+            panel_Buttons.ResumeLayout(false);
             splitContainer1.Panel1.ResumeLayout(false);
+            splitContainer1.Panel1.PerformLayout();
             splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)splitContainer1).EndInit();
             splitContainer1.ResumeLayout(false);
+            ctm_CellActions.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -195,7 +266,13 @@
         private DataGridViewTextBoxColumn Name;
         private DataGridViewTextBoxColumn Place;
         private DataGridViewTextBoxColumn GuessVal;
-        private Panel panel1;
+        private Panel panel_Buttons;
         private SplitContainer splitContainer1;
+        private Button bt_Clear;
+        private ContextMenuStrip ctm_CellActions;
+        private ToolStripMenuItem editToolStripMenuItem;
+        private ToolStripMenuItem deleteToolStripMenuItem;
+        private TextBox txt_Edit;
+        private Label lb_CellEdit;
     }
 }

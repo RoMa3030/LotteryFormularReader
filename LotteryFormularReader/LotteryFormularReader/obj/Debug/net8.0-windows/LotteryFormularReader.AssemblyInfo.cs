@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("LotteryFormularReader")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+da3f1ed47cb4d5fec5f46891c0f5d7684f5e2aab")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3bd75941ea487978f657235bc541ecbd38103e29")]
 [assembly: System.Reflection.AssemblyProductAttribute("LotteryFormularReader")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LotteryFormularReader")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
