@@ -1,9 +1,13 @@
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace LotteryFormularReader
 {
@@ -14,7 +18,6 @@ namespace LotteryFormularReader
         public MainScreen()
         {
             InitializeComponent();
-
         }
 
         #region Buttons
@@ -39,10 +42,16 @@ namespace LotteryFormularReader
 
         private void bt_ShootPic_Click(object sender, EventArgs e)
         {
+            //string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
             string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
-            string PicturePath = RunPythonScript(ScriptPath);
+            string PicturePath = "C:\\Users\\Roger Mattle\\Downloads\\TEST\\TestPic.png";
+            RunPythonScript(ScriptPath, PicturePath);
 
-            ProcessPicture(PicturePath);
+            //ProcessPicture(PicturePath);
+            PictureDisplay PreviewWindow = new PictureDisplay(PicturePath);
+            this.Enabled = false;
+            PreviewWindow.Show();
+
         }
 
         private void bt_Export_Click(object sender, EventArgs e)
@@ -78,6 +87,8 @@ namespace LotteryFormularReader
             }
         }
         #endregion
+
+
 
         #region FolderNavigation
 
@@ -237,7 +248,8 @@ namespace LotteryFormularReader
         #region PythonInterface
         private string RunPythonScript(string ScriptPath, string arg = "")
         {
-            string pythonInterpreter = "python";
+            //string pythonInterpreter = "python";
+            string pythonInterpreter = "C:\\Users\\Roger Mattle\\AppData\\Local\\Programs\\Python\\Python311\\python.exe";
             //ToDo: Adapt to relative path
             string pythonScript = ScriptPath;
 
@@ -261,6 +273,7 @@ namespace LotteryFormularReader
 
             // Wait for the process to exit
             process.WaitForExit();
+            Debug.WriteLine(Output);
             return Output;
         }
 
