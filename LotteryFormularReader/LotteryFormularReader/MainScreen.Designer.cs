@@ -99,6 +99,7 @@
             // 
             tbl_GuessList.AllowUserToAddRows = false;
             tbl_GuessList.AllowUserToDeleteRows = false;
+            tbl_GuessList.AllowUserToResizeRows = false;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
@@ -120,6 +121,7 @@
             tbl_GuessList.Size = new Size(832, 308);
             tbl_GuessList.TabIndex = 6;
             tbl_GuessList.CellMouseDown += tbl_GuessList_CellMouseDown;
+            tbl_GuessList.KeyDown += tbl_GuessList_KeyDown;
             // 
             // Name
             // 

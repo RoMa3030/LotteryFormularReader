@@ -1,6 +1,8 @@
 using System.Diagnostics;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace LotteryFormularReader
@@ -45,18 +47,31 @@ namespace LotteryFormularReader
 
         private void bt_Export_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-
-            // Show the dialog and check if the user clicked OK
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() == DialogResult.OK)
             {
-                // Get the selected file path
-                string selectedFilePath = openFileDialog.FileName;
+                string FolderPath = folderBrowserDialog.SelectedPath;
+                ConvertTableContentToCsv(FolderPath);
             }
 
         }
         #endregion
 
+        private void ConvertTableContentToCsv(string FolderPath)
+        {
+            string FilePath = FolderPath + "\\LotteryGuessesExport_" + DateTime.Now.ToString("dd.MM.yyyy") + "_" + DateTime.Now.ToString("hh.mm.ss") + ".csv";
+
+            // Create or overwrite the CSV file and write data to it
+            using (StreamWriter writer = new StreamWriter(FilePath, false, Encoding.UTF8))
+            {
+                writer.WriteLine("Name, Place, Guess");
+                foreach (DataGridViewRow row in tbl_GuessList.Rows)
+                {
+                    string LineContent = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + ","+row.Cells[2].Value.ToString();
+                    writer.WriteLine(LineContent);
+                }
+            }
+        }
 
         private void ProcessPicture(string PicturePath = "")
         {
@@ -206,7 +221,7 @@ namespace LotteryFormularReader
                                                 "Confirmation",
                                                 MessageBoxButtons.OKCancel, MessageBoxIcon.Question
                                                  );
-            if (result == DialogResult.Yes)
+            if (result == DialogResult.OK)
             {
                 tbl_GuessList.Rows.Clear();
             }
@@ -219,7 +234,7 @@ namespace LotteryFormularReader
                 ctm_CellActions.Show(Control.MousePosition);        // open dropdown menu on mouse position
                 LastClickedCell[0] = e.RowIndex;
                 LastClickedCell[1] = e.ColumnIndex;
-                HighlightSelectedCell(LastClickedCell[0], LastClickedCell[1]);   // change color of selected cell
+                //HighlightSelectedCell(LastClickedCell[0], LastClickedCell[1]);   // change color of selected cell
 
             }
         }
@@ -244,17 +259,17 @@ namespace LotteryFormularReader
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int row = LastClickedCell[0];
-            int col = LastClickedCell[1];
+            StartCellEditing(LastClickedCell[0], LastClickedCell[1]);
+        }
 
-
+        private void StartCellEditing(int row, int col)
+        {
             AdaptVisibilityOnEditControlls(true);
             lb_CellEdit.Visible = true;
             // Try to place textfield next to field to edit (not working yet)
             /*Rectangle cellDisplayRect = tbl_GuessList.GetCellDisplayRectangle(col, row, false);
             txt_Edit.Location = cellDisplayRect.Location;
             txt_Edit.BringToFront();    */
-
             txt_Edit.Select();          // Put UserCursor in textField
         }
 
@@ -270,7 +285,7 @@ namespace LotteryFormularReader
 
         private void AdaptVisibilityOnEditControlls(bool Vis)
         {
-            if(Vis == true)
+            if (Vis == true)
             {
                 txt_Edit.Visible = true;
                 lb_CellEdit.Visible = true;
@@ -284,7 +299,7 @@ namespace LotteryFormularReader
 
         private void txt_Edit_KeyDown(object sender, KeyEventArgs e)
         {
-            switch(e.KeyCode)
+            switch (e.KeyCode)
             {
                 case (Keys.Enter):
                     tbl_GuessList.Rows[LastClickedCell[0]].Cells[LastClickedCell[1]].Value = txt_Edit.Text;
@@ -295,6 +310,17 @@ namespace LotteryFormularReader
                     txt_Edit.Text = "";
                     AdaptVisibilityOnEditControlls(false);
                     break;
+            }
+        }
+
+        private void tbl_GuessList_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.Enter)
+            {
+                e.Handled = true;   //prevent cursor from Jumpin to next cell automatically
+                LastClickedCell[0] = tbl_GuessList.CurrentCell.RowIndex;
+                LastClickedCell[1] = tbl_GuessList.CurrentCell.ColumnIndex;
+                StartCellEditing(LastClickedCell[0], LastClickedCell[1]);
             }
         }
     }
