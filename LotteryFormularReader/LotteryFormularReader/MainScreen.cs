@@ -55,42 +55,31 @@ namespace LotteryFormularReader
             }
 
         }
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            StartCellEditing(LastClickedCell[0], LastClickedCell[1]);
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tbl_GuessList.Rows.RemoveAt(LastClickedCell.ElementAt(0));
+        }
+
+        private void bt_Clear_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                                                "You sure you want to clear the list?\nAll entries will be lost!",
+                                                "Confirmation",
+                                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question
+                                                 );
+            if (result == DialogResult.OK)
+            {
+                tbl_GuessList.Rows.Clear();
+            }
+        }
         #endregion
 
-        private void ConvertTableContentToCsv(string FolderPath)
-        {
-            string FilePath = FolderPath + "\\LotteryGuessesExport_" + DateTime.Now.ToString("dd.MM.yyyy") + "_" + DateTime.Now.ToString("hh.mm.ss") + ".csv";
-
-            // Create or overwrite the CSV file and write data to it
-            using (StreamWriter writer = new StreamWriter(FilePath, false, Encoding.UTF8))
-            {
-                writer.WriteLine("Name, Place, Guess");
-                foreach (DataGridViewRow row in tbl_GuessList.Rows)
-                {
-                    string LineContent = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + ","+row.Cells[2].Value.ToString();
-                    writer.WriteLine(LineContent);
-                }
-            }
-        }
-
-        private void ProcessPicture(string PicturePath = "")
-        {
-            // On valid selection run python code and write results in table
-            string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ImgProc.py";
-            string ResultString = RunPythonScript(ScriptPath, PicturePath);
-            List<GuessEntry> Guesses = EntriesParser(ResultString);
-            WriteResultsInTable(Guesses);
-        }
-
-        private void ProcessAllPicsInFolder(string path)
-        {
-            // Iterate through all .png files in the selected folder
-            string[] pngFiles = Directory.GetFiles(path, "*.png");
-            foreach (string pngFile in pngFiles)
-            {
-                ProcessPicture(pngFile);
-            }
-        }
+        #region FolderNavigation
 
         private string PicPath_UserSelect()
         {
@@ -125,7 +114,30 @@ namespace LotteryFormularReader
                 return "ERROR";
             }
         }
+        #endregion
 
+        #region PictureProcessing
+        private void ProcessPicture(string PicturePath = "")
+        {
+            // On valid selection run python code and write results in table
+            string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ImgProc.py";
+            string ResultString = RunPythonScript(ScriptPath, PicturePath);
+            List<GuessEntry> Guesses = EntriesParser(ResultString);
+            WriteResultsInTable(Guesses);
+        }
+
+        private void ProcessAllPicsInFolder(string path)
+        {
+            // Iterate through all .png files in the selected folder
+            string[] pngFiles = Directory.GetFiles(path, "*.png");
+            foreach (string pngFile in pngFiles)
+            {
+                ProcessPicture(pngFile);
+            }
+        }
+        #endregion
+
+        #region TableActions
         private void WriteResultsInTable(List<GuessEntry> Guesses)
         {
             int rows = tbl_GuessList.RowCount;
@@ -182,6 +194,46 @@ namespace LotteryFormularReader
             return Guesses;
         }
 
+        private void ConvertTableContentToCsv(string FolderPath)
+        {
+            string FilePath = FolderPath + "\\LotteryGuessesExport_" + DateTime.Now.ToString("dd.MM.yyyy") + "_" + DateTime.Now.ToString("hh.mm.ss") + ".csv";
+
+            // Create or overwrite the CSV file and write data to it
+            using (StreamWriter writer = new StreamWriter(FilePath, false, Encoding.UTF8))
+            {
+                writer.WriteLine("Name, Place, Guess");
+                foreach (DataGridViewRow row in tbl_GuessList.Rows)
+                {
+                    string LineContent = row.Cells[0].Value.ToString() + "," + row.Cells[1].Value.ToString() + "," + row.Cells[2].Value.ToString();
+                    writer.WriteLine(LineContent);
+                }
+            }
+        }
+
+        private void StartCellEditing(int row, int col)
+        {
+            AdaptVisibilityOnEditControlls(true);
+            lb_CellEdit.Visible = true;
+            // Try to place textfield next to field to edit (not working yet)
+            /*Rectangle cellDisplayRect = tbl_GuessList.GetCellDisplayRectangle(col, row, false);
+            txt_Edit.Location = cellDisplayRect.Location;
+            txt_Edit.BringToFront();    */
+            txt_Edit.Select();          // Put UserCursor in textField
+        }
+
+        private void tbl_GuessList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ctm_CellActions.Show(Control.MousePosition);        // open dropdown menu on mouse position
+                LastClickedCell[0] = e.RowIndex;
+                LastClickedCell[1] = e.ColumnIndex;
+                //HighlightSelectedCell(LastClickedCell[0], LastClickedCell[1]);   // change color of selected cell
+
+            }
+        }
+        #endregion
+
         #region PythonInterface
         private string RunPythonScript(string ScriptPath, string arg = "")
         {
@@ -214,86 +266,20 @@ namespace LotteryFormularReader
 
         #endregion
 
-        private void bt_Clear_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(
-                                                "You sure you want to clear the list?\nAll entries will be lost!",
-                                                "Confirmation",
-                                                MessageBoxButtons.OKCancel, MessageBoxIcon.Question
-                                                 );
-            if (result == DialogResult.OK)
-            {
-                tbl_GuessList.Rows.Clear();
-            }
-        }
-
-        private void tbl_GuessList_CellMouseDown(object sender, DataGridViewCellMouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-                ctm_CellActions.Show(Control.MousePosition);        // open dropdown menu on mouse position
-                LastClickedCell[0] = e.RowIndex;
-                LastClickedCell[1] = e.ColumnIndex;
-                //HighlightSelectedCell(LastClickedCell[0], LastClickedCell[1]);   // change color of selected cell
-
-            }
-        }
-
-        private void HighlightSelectedCell(int row, int col)
-        {
-            foreach (DataGridViewRow ROW in tbl_GuessList.Rows)
-            {
-                foreach (DataGridViewCell CELL in ROW.Cells)
-                {
-                    if (CELL.ColumnIndex == col && CELL.RowIndex == row)
-                    {
-                        CELL.Style.BackColor = Color.Gray; //Deafult color
-                    }
-                    else
-                    {
-                        CELL.Style.BackColor = Color.White; //Deafult color
-                    }
-                }
-            }
-        }
-
-        private void editToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            StartCellEditing(LastClickedCell[0], LastClickedCell[1]);
-        }
-
-        private void StartCellEditing(int row, int col)
-        {
-            AdaptVisibilityOnEditControlls(true);
-            lb_CellEdit.Visible = true;
-            // Try to place textfield next to field to edit (not working yet)
-            /*Rectangle cellDisplayRect = tbl_GuessList.GetCellDisplayRectangle(col, row, false);
-            txt_Edit.Location = cellDisplayRect.Location;
-            txt_Edit.BringToFront();    */
-            txt_Edit.Select();          // Put UserCursor in textField
-        }
-
-        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            tbl_GuessList.Rows.RemoveAt(LastClickedCell.ElementAt(0));
-        }
-
+        #region KeyActions
         private void MainScreen_KeyPress(object sender, KeyPressEventArgs e)
         {
             Debug.WriteLine(e.KeyChar);
         }
 
-        private void AdaptVisibilityOnEditControlls(bool Vis)
+        private void tbl_GuessList_KeyDown(object sender, KeyEventArgs e)
         {
-            if (Vis == true)
+            if (e.KeyCode == Keys.Enter)
             {
-                txt_Edit.Visible = true;
-                lb_CellEdit.Visible = true;
-            }
-            else
-            {
-                txt_Edit.Visible = false;
-                lb_CellEdit.Visible = false;
+                e.Handled = true;   //prevent cursor from Jumpin to next cell automatically
+                LastClickedCell[0] = tbl_GuessList.CurrentCell.RowIndex;
+                LastClickedCell[1] = tbl_GuessList.CurrentCell.ColumnIndex;
+                StartCellEditing(LastClickedCell[0], LastClickedCell[1]);
             }
         }
 
@@ -312,17 +298,42 @@ namespace LotteryFormularReader
                     break;
             }
         }
+        #endregion
 
-        private void tbl_GuessList_KeyDown(object sender, KeyEventArgs e)
+        #region DesignAdaptions
+        private void HighlightSelectedCell(int row, int col)
         {
-            if(e.KeyCode == Keys.Enter)
+            foreach (DataGridViewRow ROW in tbl_GuessList.Rows)
             {
-                e.Handled = true;   //prevent cursor from Jumpin to next cell automatically
-                LastClickedCell[0] = tbl_GuessList.CurrentCell.RowIndex;
-                LastClickedCell[1] = tbl_GuessList.CurrentCell.ColumnIndex;
-                StartCellEditing(LastClickedCell[0], LastClickedCell[1]);
+                foreach (DataGridViewCell CELL in ROW.Cells)
+                {
+                    if (CELL.ColumnIndex == col && CELL.RowIndex == row)
+                    {
+                        CELL.Style.BackColor = Color.Gray; //Deafult color
+                    }
+                    else
+                    {
+                        CELL.Style.BackColor = Color.White; //Deafult color
+                    }
+                }
             }
         }
+
+        private void AdaptVisibilityOnEditControlls(bool Vis)
+        {
+            if (Vis == true)
+            {
+                txt_Edit.Visible = true;
+                lb_CellEdit.Visible = true;
+            }
+            else
+            {
+                txt_Edit.Visible = false;
+                lb_CellEdit.Visible = false;
+            }
+        }
+        #endregion
+
     }
 
     class GuessEntry
