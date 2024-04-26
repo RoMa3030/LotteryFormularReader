@@ -16,7 +16,7 @@ def main(pic_path):
         ret, frame = cap.read()
 
         # Display the captured frame
-        cv2.imshow('Webcam', frame)
+        cv2.imshow('press [S] to take picture / [Q] for closing window', frame)
         key = cv2.waitKey(1)
         
         if key & 0xFF == ord('s'):
