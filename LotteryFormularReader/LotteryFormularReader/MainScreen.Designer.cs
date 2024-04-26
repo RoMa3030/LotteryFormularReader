@@ -87,7 +87,7 @@
             // 
             // bt_Export
             // 
-            bt_Export.Location = new Point(15, 77);
+            bt_Export.Location = new Point(15, 56);
             bt_Export.Name = "bt_Export";
             bt_Export.Size = new Size(148, 29);
             bt_Export.TabIndex = 5;
@@ -190,7 +190,7 @@
             lb_CellEdit.AutoSize = true;
             lb_CellEdit.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lb_CellEdit.ForeColor = Color.Red;
-            lb_CellEdit.Location = new Point(445, 56);
+            lb_CellEdit.Location = new Point(433, 51);
             lb_CellEdit.Name = "lb_CellEdit";
             lb_CellEdit.Size = new Size(86, 20);
             lb_CellEdit.TabIndex = 9;
@@ -200,7 +200,7 @@
             // txt_Edit
             // 
             txt_Edit.BackColor = Color.FromArgb(255, 192, 192);
-            txt_Edit.Location = new Point(445, 79);
+            txt_Edit.Location = new Point(433, 74);
             txt_Edit.Name = "txt_Edit";
             txt_Edit.Size = new Size(303, 27);
             txt_Edit.TabIndex = 8;
@@ -209,7 +209,7 @@
             // 
             // bt_Clear
             // 
-            bt_Clear.Location = new Point(186, 77);
+            bt_Clear.Location = new Point(186, 56);
             bt_Clear.Name = "bt_Clear";
             bt_Clear.Size = new Size(148, 29);
             bt_Clear.TabIndex = 6;

@@ -80,10 +80,7 @@ namespace LotteryFormularReader
         }
         #endregion
 
-
-
         #region FolderNavigation
-
         private string PicPath_UserSelect()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -137,6 +134,43 @@ namespace LotteryFormularReader
             {
                 ProcessPicture(pngFile);
             }
+        }
+
+        private void ShootNewPicture()
+        {
+            //string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
+            string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
+            string PicturePath = Path.GetTempPath();
+            PicturePath += "NewImg.png";
+
+            RunPythonScript(ScriptPath, PicturePath);
+
+            //ProcessPicture(PicturePath);
+            PictureDisplay PreviewWindow = new PictureDisplay(PicturePath);
+            PreviewWindow.Show();
+            this.Enabled = false;
+
+            PreviewWindow.FormClosed += (sender1, e1) =>
+            {
+                //Called on closing of PreviewWindow
+                this.Enabled = true;
+                switch (PreviewWindow.UserCommand)
+                {
+                    case 0: // Cancel
+                        break;
+                    case 1: // take new Picture
+                        PreviewWindow.Dispose();
+                        ShootNewPicture();
+                        break;
+                    case 2: // Picture Okay
+                        ProcessPicture(PicturePath);
+                        break;
+                }
+                if (File.Exists(PicturePath))
+                {
+                    File.Delete(PicturePath);
+                }
+            };
         }
         #endregion
 
@@ -338,37 +372,6 @@ namespace LotteryFormularReader
             }
         }
         #endregion
-
-        private void ShootNewPicture()
-        {
-            //string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
-            string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
-            string PicturePath = "C:\\Users\\Roger Mattle\\Downloads\\TEST\\TestPic.png";
-            RunPythonScript(ScriptPath, PicturePath);
-
-            //ProcessPicture(PicturePath);
-            PictureDisplay PreviewWindow = new PictureDisplay(PicturePath);
-            PreviewWindow.Show();
-            this.Enabled = false;
-
-            PreviewWindow.FormClosed += (sender1, e1) =>
-            {
-                //Called on closing of PreviewWindow
-                this.Enabled = true;
-                switch (PreviewWindow.UserCommand)
-                {
-                    case 0: // Cancel
-                        break;
-                    case 1: // take new Picture
-                        PreviewWindow.Dispose();
-                        ShootNewPicture();
-                        break;
-                    case 2: // Picture Okay
-                        ProcessPicture(PicturePath);
-                        break;
-                }
-            };
-        }
 
     }
 
