@@ -266,7 +266,6 @@ namespace LotteryFormularReader
                 LastClickedCell[0] = e.RowIndex;
                 LastClickedCell[1] = e.ColumnIndex;
                 //HighlightSelectedCell(LastClickedCell[0], LastClickedCell[1]);   // change color of selected cell
-
             }
         }
         #endregion

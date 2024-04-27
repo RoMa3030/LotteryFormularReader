@@ -7,12 +7,20 @@
       "RelativeMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|solutionrelative:lotteryformularreader\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\lotteryformularreader\\mainscreen.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|solutionrelative:lotteryformularreader\\mainscreen.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\lotteryformularreader\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|solutionrelative:lotteryformularreader\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|c:\\fhgr_programme\\lotteryformularreader\\lotteryformularreader\\lotteryformularreader\\picturedisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|solutionrelative:lotteryformularreader\\picturedisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|c:\\fhgr_programme\\lotteryformularreader\\lotteryformularreader\\lotteryformularreader\\picturedisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|solutionrelative:lotteryformularreader\\picturedisplay.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\lotteryformularreader\\mainscreen.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|solutionrelative:lotteryformularreader\\mainscreen.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,11 +30,36 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 2,
+              "Title": "PictureDisplay.cs",
+              "DocumentMoniker": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\PictureDisplay.cs",
+              "RelativeDocumentMoniker": "LotteryFormularReader\\PictureDisplay.cs",
+              "ToolTip": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\PictureDisplay.cs",
+              "RelativeToolTip": "LotteryFormularReader\\PictureDisplay.cs",
+              "ViewState": "AQIAABUAAAAAAAAAAAAnwCcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-27T07:55:00.676Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PictureDisplay.cs [Design]",
+              "DocumentMoniker": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\PictureDisplay.cs",
+              "RelativeDocumentMoniker": "LotteryFormularReader\\PictureDisplay.cs",
+              "ToolTip": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\PictureDisplay.cs [Design]",
+              "RelativeToolTip": "LotteryFormularReader\\PictureDisplay.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-04-27T07:53:32.425Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "MainScreen.cs [Design]",
               "DocumentMoniker": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\MainScreen.cs",
               "RelativeDocumentMoniker": "LotteryFormularReader\\MainScreen.cs",
@@ -44,14 +77,14 @@
               "RelativeDocumentMoniker": "LotteryFormularReader\\MainScreen.cs",
               "ToolTip": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\MainScreen.cs",
               "RelativeToolTip": "LotteryFormularReader\\MainScreen.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAswIkAAAAAAAAA",
+              "ViewState": "AQIAAM0AAAAAAAAAAADwvwsBAABzAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-04-17T11:32:16.51Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "MainScreen.Designer.cs",
               "DocumentMoniker": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\MainScreen.Designer.cs",
               "RelativeDocumentMoniker": "LotteryFormularReader\\MainScreen.Designer.cs",
@@ -59,7 +92,8 @@
               "RelativeToolTip": "LotteryFormularReader\\MainScreen.Designer.cs",
               "ViewState": "AQIAANMAAAAAAAAAAAAmwPcAAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-04-17T12:20:56.576Z"
+              "WhenOpened": "2024-04-17T12:20:56.576Z",
+              "EditorCaption": ""
             }
           ]
         }

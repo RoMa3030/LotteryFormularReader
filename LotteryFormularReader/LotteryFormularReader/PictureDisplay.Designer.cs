@@ -39,13 +39,13 @@
             // 
             pb_Preview.Location = new Point(12, 12);
             pb_Preview.Name = "pb_Preview";
-            pb_Preview.Size = new Size(530, 357);
+            pb_Preview.Size = new Size(703, 462);
             pb_Preview.TabIndex = 0;
             pb_Preview.TabStop = false;
             // 
             // bt_UsePic
             // 
-            bt_UsePic.Location = new Point(407, 376);
+            bt_UsePic.Location = new Point(582, 481);
             bt_UsePic.Name = "bt_UsePic";
             bt_UsePic.Size = new Size(135, 29);
             bt_UsePic.TabIndex = 1;
@@ -55,7 +55,7 @@
             // 
             // bt_Reshoot
             // 
-            bt_Reshoot.Location = new Point(266, 375);
+            bt_Reshoot.Location = new Point(441, 480);
             bt_Reshoot.Name = "bt_Reshoot";
             bt_Reshoot.Size = new Size(135, 29);
             bt_Reshoot.TabIndex = 2;
@@ -65,7 +65,7 @@
             // 
             // bt_Esc
             // 
-            bt_Esc.Location = new Point(125, 375);
+            bt_Esc.Location = new Point(300, 480);
             bt_Esc.Name = "bt_Esc";
             bt_Esc.Size = new Size(135, 29);
             bt_Esc.TabIndex = 3;
@@ -77,12 +77,11 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(554, 417);
+            ClientSize = new Size(725, 516);
             Controls.Add(bt_Esc);
             Controls.Add(bt_Reshoot);
             Controls.Add(bt_UsePic);
             Controls.Add(pb_Preview);
-            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "PictureDisplay";
             Text = "PictureDisplay";
             ((System.ComponentModel.ISupportInitialize)pb_Preview).EndInit();
