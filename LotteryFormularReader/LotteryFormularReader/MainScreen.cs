@@ -16,6 +16,11 @@ namespace LotteryFormularReader
         List<int> LastClickedCell = new List<int>() { 0, 0 };
         private bool MultiCellEditModeActive = false;
 
+        // default paths = paths for Roger's PC
+        private string PythonPath = "C:\\Users\\Roger Mattle\\AppData\\Local\\Programs\\Python\\Python311\\python.exe";
+        private string TextRecoPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ImgProc.py";
+        private string PhotoPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
+
         public MainScreen()
         {
             InitializeComponent();
@@ -44,7 +49,6 @@ namespace LotteryFormularReader
         private void bt_ShootPic_Click(object sender, EventArgs e)
         {
             ShootNewPicture();
-
         }
 
         private void bt_Export_Click(object sender, EventArgs e)
@@ -70,7 +74,7 @@ namespace LotteryFormularReader
 
         private void editAllEqualsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MultiCellEditModeActive = true; 
+            MultiCellEditModeActive = true;
             StartCellEditing(LastClickedCell[0], LastClickedCell[1], true);
         }
 
@@ -128,7 +132,7 @@ namespace LotteryFormularReader
         private void ProcessPicture(string PicturePath = "")
         {
             // On valid selection run python code and write results in table
-            string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ImgProc.py";
+            string ScriptPath = TextRecoPath;
             string ResultString = RunPythonScript(ScriptPath, PicturePath);
             List<GuessEntry> Guesses = EntriesParser(ResultString);
             WriteResultsInTable(Guesses);
@@ -148,8 +152,7 @@ namespace LotteryFormularReader
 
         private void ShootNewPicture()
         {
-            //string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
-            string ScriptPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
+            string ScriptPath = PhotoPath;
             string PicturePath = Path.GetTempPath();
             PicturePath += "NewImg.png";
 
@@ -290,9 +293,7 @@ namespace LotteryFormularReader
         #region PythonInterface
         private string RunPythonScript(string ScriptPath, string arg = "")
         {
-            //string pythonInterpreter = "python";
-            string pythonInterpreter = "C:\\Users\\Roger Mattle\\AppData\\Local\\Programs\\Python\\Python311\\python.exe";
-            //ToDo: Adapt to relative path
+            string pythonInterpreter = PythonPath;
             string pythonScript = ScriptPath;
 
             // Create a ProcessStartInfo object to configure the process
@@ -307,7 +308,15 @@ namespace LotteryFormularReader
             // Create and start the process
             Process process = new Process();
             process.StartInfo = startInfo;
-            process.Start();
+            try
+            {
+                process.Start();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Could not start Process.\nMake sure paths are correct in SETTINGS!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return "";
+            }
 
             // Read the output of the Python script
             string Output = process.StandardError.ReadToEnd();
@@ -367,17 +376,16 @@ namespace LotteryFormularReader
                     AdaptVisibilityOnEditControlls(false);
                     break;
             }
-
         }
         #endregion
 
         private void ChangeAllCellsWithSameContent(string oldText, string newText)
         {
-            foreach(DataGridViewRow row in tbl_GuessList.Rows)
+            foreach (DataGridViewRow row in tbl_GuessList.Rows)
             {
-                foreach(DataGridViewCell cell in row.Cells)
+                foreach (DataGridViewCell cell in row.Cells)
                 {
-                    if(cell.Value.ToString() == oldText)
+                    if (cell.Value.ToString() == oldText)
                     {
                         cell.Value = newText;
                     }
@@ -419,6 +427,34 @@ namespace LotteryFormularReader
         }
         #endregion
 
+        private void bt_Settings_Click(object sender, EventArgs e)
+        {
+            Settings SettingsPage = new Settings();
+            SettingsPage.Show();
+            this.Enabled = false;
+
+            SettingsPage.FormClosed += (sender1, e1) =>
+            {
+                //Called on closing of PreviewWindow
+                this.Enabled = true;
+                if(SettingsPage.OutputConfirmed == true)
+                {
+                    if (SettingsPage.PythonPath != null)
+                    {
+                        PythonPath = SettingsPage.PythonPath;
+                    }
+                    if (SettingsPage.TextRecoPath != null)
+                    {
+                        TextRecoPath = SettingsPage.TextRecoPath;
+                    }
+                    if (SettingsPage.PhotoPath != null)
+                    {
+                        PhotoPath = SettingsPage.PhotoPath;
+                    }
+                }
+            };
+
+        }
     }
 
     class GuessEntry

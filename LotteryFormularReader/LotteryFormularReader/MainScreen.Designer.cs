@@ -45,8 +45,9 @@
             bt_Clear = new Button();
             ctm_CellActions = new ContextMenuStrip(components);
             editToolStripMenuItem = new ToolStripMenuItem();
-            deleteToolStripMenuItem = new ToolStripMenuItem();
             editAllEqualsToolStripMenuItem = new ToolStripMenuItem();
+            deleteToolStripMenuItem = new ToolStripMenuItem();
+            bt_Settings = new Button();
             ((System.ComponentModel.ISupportInitialize)tbl_GuessList).BeginInit();
             panel_Buttons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -169,6 +170,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            splitContainer1.Panel1.Controls.Add(bt_Settings);
             splitContainer1.Panel1.Controls.Add(lb_CellEdit);
             splitContainer1.Panel1.Controls.Add(txt_Edit);
             splitContainer1.Panel1.Controls.Add(bt_Clear);
@@ -223,28 +225,38 @@
             ctm_CellActions.ImageScalingSize = new Size(20, 20);
             ctm_CellActions.Items.AddRange(new ToolStripItem[] { editToolStripMenuItem, editAllEqualsToolStripMenuItem, deleteToolStripMenuItem });
             ctm_CellActions.Name = "ctm_CellActions";
-            ctm_CellActions.Size = new Size(211, 104);
+            ctm_CellActions.Size = new Size(174, 76);
             // 
             // editToolStripMenuItem
             // 
             editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(210, 24);
+            editToolStripMenuItem.Size = new Size(173, 24);
             editToolStripMenuItem.Text = "Edit";
             editToolStripMenuItem.Click += editToolStripMenuItem_Click;
-            // 
-            // deleteToolStripMenuItem
-            // 
-            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(210, 24);
-            deleteToolStripMenuItem.Text = "Delete";
-            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
             // editAllEqualsToolStripMenuItem
             // 
             editAllEqualsToolStripMenuItem.Name = "editAllEqualsToolStripMenuItem";
-            editAllEqualsToolStripMenuItem.Size = new Size(210, 24);
+            editAllEqualsToolStripMenuItem.Size = new Size(173, 24);
             editAllEqualsToolStripMenuItem.Text = "Edit All Equals";
             editAllEqualsToolStripMenuItem.Click += editAllEqualsToolStripMenuItem_Click;
+            // 
+            // deleteToolStripMenuItem
+            // 
+            deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            deleteToolStripMenuItem.Size = new Size(173, 24);
+            deleteToolStripMenuItem.Text = "Delete";
+            deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
+            // 
+            // bt_Settings
+            // 
+            bt_Settings.Location = new Point(733, 12);
+            bt_Settings.Name = "bt_Settings";
+            bt_Settings.Size = new Size(87, 29);
+            bt_Settings.TabIndex = 10;
+            bt_Settings.Text = "Settings";
+            bt_Settings.UseVisualStyleBackColor = true;
+            bt_Settings.Click += bt_Settings_Click;
             // 
             // MainScreen
             // 
@@ -285,5 +297,6 @@
         private TextBox txt_Edit;
         private Label lb_CellEdit;
         private ToolStripMenuItem editAllEqualsToolStripMenuItem;
+        private Button bt_Settings;
     }
 }

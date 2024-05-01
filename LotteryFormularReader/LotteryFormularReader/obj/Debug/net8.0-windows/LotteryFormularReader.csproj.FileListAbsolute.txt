@@ -16,3 +16,4 @@ C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularRea
 C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\ref\LotteryFormularReader.dll
 C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.sourcelink.json
 C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.PictureDisplay.resources
+C:\FHGR_Programme\LotteryFormularReader\LotteryFormularReader\LotteryFormularReader\obj\Debug\net8.0-windows\LotteryFormularReader.Settings.resources
