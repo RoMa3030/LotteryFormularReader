@@ -14,6 +14,7 @@ namespace LotteryFormularReader
     public partial class MainScreen : Form
     {
         List<int> LastClickedCell = new List<int>() { 0, 0 };
+        private bool MultiCellEditModeActive = false;
 
         public MainScreen()
         {
@@ -58,12 +59,19 @@ namespace LotteryFormularReader
         }
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            StartCellEditing(LastClickedCell[0], LastClickedCell[1]);
+            MultiCellEditModeActive = false;
+            StartCellEditing(LastClickedCell[0], LastClickedCell[1], false);
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tbl_GuessList.Rows.RemoveAt(LastClickedCell.ElementAt(0));
+        }
+
+        private void editAllEqualsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MultiCellEditModeActive = true; 
+            StartCellEditing(LastClickedCell[0], LastClickedCell[1], true);
         }
 
         private void bt_Clear_Click(object sender, EventArgs e)
@@ -247,7 +255,7 @@ namespace LotteryFormularReader
             }
         }
 
-        private void StartCellEditing(int row, int col)
+        private void StartCellEditing(int row, int col, bool AdaptMultipleCells)
         {
             AdaptVisibilityOnEditControlls(true);
             lb_CellEdit.Visible = true;
@@ -317,7 +325,8 @@ namespace LotteryFormularReader
                 e.Handled = true;   //prevent cursor from Jumpin to next cell automatically
                 LastClickedCell[0] = tbl_GuessList.CurrentCell.RowIndex;
                 LastClickedCell[1] = tbl_GuessList.CurrentCell.ColumnIndex;
-                StartCellEditing(LastClickedCell[0], LastClickedCell[1]);
+                MultiCellEditModeActive = false;
+                StartCellEditing(LastClickedCell[0], LastClickedCell[1], false);
             }
         }
 
@@ -326,17 +335,43 @@ namespace LotteryFormularReader
             switch (e.KeyCode)
             {
                 case (Keys.Enter):
-                    tbl_GuessList.Rows[LastClickedCell[0]].Cells[LastClickedCell[1]].Value = txt_Edit.Text;
+                    string oldText = tbl_GuessList.Rows[LastClickedCell[0]].Cells[LastClickedCell[1]].Value.ToString();
+                    string newText = txt_Edit.Text;
+
+                    tbl_GuessList.Rows[LastClickedCell[0]].Cells[LastClickedCell[1]].Value = newText;
                     txt_Edit.Text = "";
                     AdaptVisibilityOnEditControlls(false);
+
+                    if (MultiCellEditModeActive)
+                    {
+                        if (LastClickedCell[1] != 2)        // do not allow to do this, if the guess is being edited
+                        {                                   // to not corrupt old results with same guess.
+                            ChangeAllCellsWithSameContent(oldText, newText);
+                        }
+                    }
                     break;
                 case (Keys.Escape):
                     txt_Edit.Text = "";
                     AdaptVisibilityOnEditControlls(false);
                     break;
             }
+
         }
         #endregion
+
+        private void ChangeAllCellsWithSameContent(string oldText, string newText)
+        {
+            foreach(DataGridViewRow row in tbl_GuessList.Rows)
+            {
+                foreach(DataGridViewCell cell in row.Cells)
+                {
+                    if(cell.Value.ToString() == oldText)
+                    {
+                        cell.Value = newText;
+                    }
+                }
+            }
+        }
 
         #region DesignAdaptions
         private void HighlightSelectedCell(int row, int col)

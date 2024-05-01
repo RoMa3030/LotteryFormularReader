@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             bt_SelPic = new Button();
             bt_SelFolder = new Button();
             bt_ShootPic = new Button();
@@ -46,6 +46,7 @@
             ctm_CellActions = new ContextMenuStrip(components);
             editToolStripMenuItem = new ToolStripMenuItem();
             deleteToolStripMenuItem = new ToolStripMenuItem();
+            editAllEqualsToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)tbl_GuessList).BeginInit();
             panel_Buttons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -100,14 +101,14 @@
             tbl_GuessList.AllowUserToAddRows = false;
             tbl_GuessList.AllowUserToDeleteRows = false;
             tbl_GuessList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            tbl_GuessList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = SystemColors.Control;
+            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            tbl_GuessList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             tbl_GuessList.ColumnHeadersHeight = 29;
             tbl_GuessList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             tbl_GuessList.Columns.AddRange(new DataGridViewColumn[] { Name, Place, GuessVal });
@@ -220,23 +221,30 @@
             // ctm_CellActions
             // 
             ctm_CellActions.ImageScalingSize = new Size(20, 20);
-            ctm_CellActions.Items.AddRange(new ToolStripItem[] { editToolStripMenuItem, deleteToolStripMenuItem });
+            ctm_CellActions.Items.AddRange(new ToolStripItem[] { editToolStripMenuItem, editAllEqualsToolStripMenuItem, deleteToolStripMenuItem });
             ctm_CellActions.Name = "ctm_CellActions";
-            ctm_CellActions.Size = new Size(123, 52);
+            ctm_CellActions.Size = new Size(211, 104);
             // 
             // editToolStripMenuItem
             // 
             editToolStripMenuItem.Name = "editToolStripMenuItem";
-            editToolStripMenuItem.Size = new Size(122, 24);
+            editToolStripMenuItem.Size = new Size(210, 24);
             editToolStripMenuItem.Text = "Edit";
             editToolStripMenuItem.Click += editToolStripMenuItem_Click;
             // 
             // deleteToolStripMenuItem
             // 
             deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
-            deleteToolStripMenuItem.Size = new Size(122, 24);
+            deleteToolStripMenuItem.Size = new Size(210, 24);
             deleteToolStripMenuItem.Text = "Delete";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
+            // 
+            // editAllEqualsToolStripMenuItem
+            // 
+            editAllEqualsToolStripMenuItem.Name = "editAllEqualsToolStripMenuItem";
+            editAllEqualsToolStripMenuItem.Size = new Size(210, 24);
+            editAllEqualsToolStripMenuItem.Text = "Edit All Equals";
+            editAllEqualsToolStripMenuItem.Click += editAllEqualsToolStripMenuItem_Click;
             // 
             // MainScreen
             // 
@@ -276,5 +284,6 @@
         private ToolStripMenuItem deleteToolStripMenuItem;
         private TextBox txt_Edit;
         private Label lb_CellEdit;
+        private ToolStripMenuItem editAllEqualsToolStripMenuItem;
     }
 }
