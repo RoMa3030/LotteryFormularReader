@@ -136,6 +136,8 @@ namespace LotteryFormularReader
 
         private void ProcessAllPicsInFolder(string path)
         {
+            if (path == "ERROR")
+                return;
             // Iterate through all .png files in the selected folder
             string[] pngFiles = Directory.GetFiles(path, "*.png");
             foreach (string pngFile in pngFiles)
@@ -186,6 +188,11 @@ namespace LotteryFormularReader
         private void WriteResultsInTable(List<GuessEntry> Guesses)
         {
             int rows = tbl_GuessList.RowCount;
+            if (Guesses.Count() == 0)    // don't do when no names recognized
+            {
+                MessageBox.Show("Could not find any valid data in picture!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             tbl_GuessList.Rows.Add(Guesses.Count());
             foreach (GuessEntry entry in Guesses)
             {
@@ -258,6 +265,8 @@ namespace LotteryFormularReader
         private void StartCellEditing(int row, int col, bool AdaptMultipleCells)
         {
             AdaptVisibilityOnEditControlls(true);
+            string LastCellContent = tbl_GuessList.Rows[LastClickedCell[0]].Cells[LastClickedCell[1]].Value.ToString();
+            txt_Edit.Text = LastCellContent;
             lb_CellEdit.Visible = true;
             // Try to place textfield next to field to edit (not working yet)
             /*Rectangle cellDisplayRect = tbl_GuessList.GetCellDisplayRectangle(col, row, false);
@@ -349,6 +358,9 @@ namespace LotteryFormularReader
                             ChangeAllCellsWithSameContent(oldText, newText);
                         }
                     }
+                    break;
+                case (Keys.Delete):
+                    txt_Edit.Text = "";
                     break;
                 case (Keys.Escape):
                     txt_Edit.Text = "";
