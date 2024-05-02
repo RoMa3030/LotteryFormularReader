@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Settings));
             txt_1 = new TextBox();
             txt_2 = new TextBox();
             txt_3 = new TextBox();
@@ -158,6 +159,7 @@
             Controls.Add(txt_3);
             Controls.Add(txt_2);
             Controls.Add(txt_1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Settings";
             Text = "Settings";
             ResumeLayout(false);

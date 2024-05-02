@@ -6,6 +6,13 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>img\LFR_Logo.ico</ApplicationIcon>
+    <Title>Lottery Formular Reader</Title>
+    <Company>Roger-IT AG</Company>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="img\LFR_Logo.ico" />
+  </ItemGroup>
 
 </Project>

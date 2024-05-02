@@ -11,10 +11,10 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("LotteryFormularReader")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("Roger-IT AG")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0498bc3df3aab1a21e937e169a81b1bebbefa887")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6e535a596cfecad9619e50a51a6520e29354598d")]
 [assembly: System.Reflection.AssemblyProductAttribute("LotteryFormularReader")]
 [assembly: System.Reflection.AssemblyTitleAttribute("LotteryFormularReader")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

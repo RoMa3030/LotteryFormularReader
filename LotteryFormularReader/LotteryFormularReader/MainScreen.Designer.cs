@@ -29,7 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainScreen));
             bt_SelPic = new Button();
             bt_SelFolder = new Button();
             bt_ShootPic = new Button();
@@ -40,6 +41,7 @@
             GuessVal = new DataGridViewTextBoxColumn();
             panel_Buttons = new Panel();
             splitContainer1 = new SplitContainer();
+            bt_Settings = new Button();
             lb_CellEdit = new Label();
             txt_Edit = new TextBox();
             bt_Clear = new Button();
@@ -47,7 +49,6 @@
             editToolStripMenuItem = new ToolStripMenuItem();
             editAllEqualsToolStripMenuItem = new ToolStripMenuItem();
             deleteToolStripMenuItem = new ToolStripMenuItem();
-            bt_Settings = new Button();
             ((System.ComponentModel.ISupportInitialize)tbl_GuessList).BeginInit();
             panel_Buttons.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)splitContainer1).BeginInit();
@@ -102,14 +103,14 @@
             tbl_GuessList.AllowUserToAddRows = false;
             tbl_GuessList.AllowUserToDeleteRows = false;
             tbl_GuessList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = SystemColors.Control;
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            dataGridViewCellStyle2.ForeColor = SystemColors.WindowText;
-            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            tbl_GuessList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = SystemColors.Control;
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            tbl_GuessList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             tbl_GuessList.ColumnHeadersHeight = 29;
             tbl_GuessList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             tbl_GuessList.Columns.AddRange(new DataGridViewColumn[] { Name, Place, GuessVal });
@@ -188,6 +189,16 @@
             splitContainer1.SplitterDistance = 121;
             splitContainer1.TabIndex = 6;
             // 
+            // bt_Settings
+            // 
+            bt_Settings.Location = new Point(733, 12);
+            bt_Settings.Name = "bt_Settings";
+            bt_Settings.Size = new Size(87, 29);
+            bt_Settings.TabIndex = 10;
+            bt_Settings.Text = "Settings";
+            bt_Settings.UseVisualStyleBackColor = true;
+            bt_Settings.Click += bt_Settings_Click;
+            // 
             // lb_CellEdit
             // 
             lb_CellEdit.AutoSize = true;
@@ -248,22 +259,13 @@
             deleteToolStripMenuItem.Text = "Delete";
             deleteToolStripMenuItem.Click += deleteToolStripMenuItem_Click;
             // 
-            // bt_Settings
-            // 
-            bt_Settings.Location = new Point(733, 12);
-            bt_Settings.Name = "bt_Settings";
-            bt_Settings.Size = new Size(87, 29);
-            bt_Settings.TabIndex = 10;
-            bt_Settings.Text = "Settings";
-            bt_Settings.UseVisualStyleBackColor = true;
-            bt_Settings.Click += bt_Settings_Click;
-            // 
             // MainScreen
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(832, 433);
             Controls.Add(panel_Buttons);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MinimumSize = new Size(540, 380);
             Name.Name = "MainScreen";
             Text = "Lottery Formular Reader";

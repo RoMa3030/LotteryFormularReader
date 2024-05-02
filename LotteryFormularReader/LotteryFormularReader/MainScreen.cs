@@ -18,9 +18,10 @@ namespace LotteryFormularReader
 
         // default paths = paths for Roger's PC
         private string PythonPath = "C:\\Users\\Roger Mattle\\AppData\\Local\\Programs\\Python\\Python311\\python.exe";
-        private string TextRecoPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ImgProc.py";
-        private string PhotoPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
-
+        //private string TextRecoPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ImgProc.py";
+        //private string PhotoPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
+        private string TextRecoPath = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "FormularReader_ImgProc.py");
+        private string PhotoPath = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "FormularReader_ShootPicture.py");
         public MainScreen()
         {
             InitializeComponent();

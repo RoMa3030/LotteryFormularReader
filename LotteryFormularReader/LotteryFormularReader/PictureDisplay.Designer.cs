@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PictureDisplay));
             pb_Preview = new PictureBox();
             bt_UsePic = new Button();
             bt_Reshoot = new Button();
@@ -82,6 +83,7 @@
             Controls.Add(bt_Reshoot);
             Controls.Add(bt_UsePic);
             Controls.Add(pb_Preview);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "PictureDisplay";
             Text = "PictureDisplay";
             ((System.ComponentModel.ISupportInitialize)pb_Preview).EndInit();
