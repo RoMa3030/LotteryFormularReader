@@ -77,10 +77,23 @@ def img_adapt_for_placement_rec(img, thresh):
     return adapted_img
 
 
-def img_adapt_for_text_rec(img):
-    #print("no change for text recognition")
-    return img
+def get_text_rec_thresh(img):
+    thresh = img.mean() -40
+    if thresh > 10:
+        return thresh
+    else:
+        print("ERROR: Picture too dark!")
+        sys.exit(1)
 
+
+def img_adapt_for_text_rec(img):
+    thresh = get_text_rec_thresh(img)
+    
+    proc = img.astype(float)
+    proc[proc < thresh]=0
+    proc[proc > thresh]=255
+    proc = proc.astype(np.uint8)
+    return proc
 
 def adapt_image(img):
     # Adapt size
@@ -139,7 +152,7 @@ def crop_img_in_segments(img, temp_directory):
     height,width = img.shape
     
     # Name field
-    x1 = int(12*width/87)
+    x1 = int(11*width/87)
     x2 = int(width-1)
     y1 = int(1*height/67)
     y2 = int(10*height/67)
@@ -147,7 +160,7 @@ def crop_img_in_segments(img, temp_directory):
     cv2.imwrite((temp_directory + "/FieldName.png"), cropped_image)
     
     # Place field
-    x1 = int(15*width/87)
+    x1 = int(14*width/87)
     x2 = int(width-1)
     y1 = int(10*height/67)
     y2 = int(21*height/67)
@@ -240,8 +253,12 @@ if __name__ == "__main__":
     if len(rectangles) > 1:
         print("ERROR: More Rectangles recognized")
         sys.exit(1)
+    else:
+        if len(rectangles) == 0:
+            print("ERROR: No Rectangles recognized")
+            sys.exit(1)
         
-    img_crop, img_rot = crop_rect(img, rectangles[0])
+    img_crop, img_rot = crop_rect(img_text, rectangles[0])
     
     if is_not_horizontal(img_crop):
         img_crop = cv2.transpose(img_crop)

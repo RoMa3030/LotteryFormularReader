@@ -18,10 +18,10 @@ namespace LotteryFormularReader
 
         // default paths = paths for Roger's PC
         private string PythonPath = "C:\\Users\\Roger Mattle\\AppData\\Local\\Programs\\Python\\Python311\\python.exe";
-        //private string TextRecoPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ImgProc.py";
-        //private string PhotoPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
-        private string TextRecoPath = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "FormularReader_ImgProc.py");
-        private string PhotoPath = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "FormularReader_ShootPicture.py");
+        private string TextRecoPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ImgProc.py";
+        private string PhotoPath = "C:\\FHGR_Programme\\LotteryFormularReader\\FormularReader_ImageProcessing\\FormularReader_ShootPicture.py";
+        //private string TextRecoPath = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "FormularReader_ImgProc.py");
+        //private string PhotoPath = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "FormularReader_ShootPicture.py");
         public MainScreen()
         {
             InitializeComponent();
@@ -34,10 +34,6 @@ namespace LotteryFormularReader
             if (path != "ERROR")
             {
                 ProcessPicture(path);
-            }
-            else
-            {
-                MessageBox.Show("An error occurred!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -123,7 +119,6 @@ namespace LotteryFormularReader
             }
             else
             {
-                MessageBox.Show("An error occurred!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return "ERROR";
             }
         }
@@ -135,8 +130,16 @@ namespace LotteryFormularReader
             // On valid selection run python code and write results in table
             string ScriptPath = TextRecoPath;
             string ResultString = RunPythonScript(ScriptPath, PicturePath);
-            List<GuessEntry> Guesses = EntriesParser(ResultString);
-            WriteResultsInTable(Guesses);
+            if(ResultString.Substring(0,5) != "ERROR")
+            {
+                List<GuessEntry> Guesses = EntriesParser(ResultString);
+                WriteResultsInTable(Guesses);
+            }
+            else
+            {
+                MessageBox.Show("Could not find any valid data in picture!\n"+ResultString, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+           
         }
 
         private void ProcessAllPicsInFolder(string path)
@@ -194,7 +197,6 @@ namespace LotteryFormularReader
             int rows = tbl_GuessList.RowCount;
             if (Guesses.Count() == 0)    // don't do when no names recognized
             {
-                MessageBox.Show("Could not find any valid data in picture!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             tbl_GuessList.Rows.Add(Guesses.Count());
