@@ -17,3 +17,8 @@ There will be no output if not all the required Python libraries are already ins
 - shutil
 - re
 
+In order to use the smartphone camera instead of the pc webcam, the app Iriun Webcam must be installed on the smartphone and installed on the pc.
+  https://iriun.com/
+An instance of the Iriun Camera Server must be running during the PC.
+The smartphone camera must be selected in **Settings**.
+
