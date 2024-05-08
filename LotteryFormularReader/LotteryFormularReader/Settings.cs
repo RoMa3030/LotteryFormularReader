@@ -16,10 +16,12 @@ namespace LotteryFormularReader
         public string PythonPath = "";
         public string TextRecoPath = "";
         public string PhotoPath = "";
+        public bool UsePhoneCam = true;
 
         public Settings()
         {
             InitializeComponent();
+            rbt_UseWebcam.Checked = true;
         }
 
         private void bt_Python_Click(object sender, EventArgs e)
@@ -30,7 +32,7 @@ namespace LotteryFormularReader
                 PythonPath = path;
                 txt_1.Text = PythonPath;
             }
-            
+
         }
 
         private void bt_Recog_Click(object sender, EventArgs e)
@@ -60,6 +62,15 @@ namespace LotteryFormularReader
 
         private void bt_OK_Click(object sender, EventArgs e)
         {
+            if (rbt_UsePhone.Checked)
+            {
+                UsePhoneCam = true;
+            }
+            else
+            {
+                UsePhoneCam = false;
+            }
+
             OutputConfirmed = true;
             this.Close();
         }
@@ -76,6 +87,11 @@ namespace LotteryFormularReader
                 return selectedFilePath;
             }
             return "";
+        }
+
+        private void rbt_UsePhone_CheckedChanged(object sender, EventArgs e)
+        {
+            //OutputConfirmed = true;
         }
     }
 }

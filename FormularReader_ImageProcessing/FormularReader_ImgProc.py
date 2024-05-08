@@ -2,7 +2,6 @@ import cv2
 import numpy as np
 import sys
 import matplotlib.pyplot as plt
-#import aspose.ocr as ocr
 import tempfile
 import shutil
 import os
@@ -13,6 +12,7 @@ import re
 pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 def points_on_border(inp_rect, img_shape):
+    """returns number of edges, that lay very close to picture border"""
     img_w, img_h = img_shape
     box = cv2.boxPoints(inp_rect).astype(np.intp)
     rect = cv2.minAreaRect(box)
@@ -27,8 +27,8 @@ def points_on_border(inp_rect, img_shape):
     #print(f"Points on Boarder: {points_on_border_cnt}")
     return points_on_border_cnt
 
-def find_rectangles(img):
-    img = img.copy()
+def find_rectangles(inp_img):
+    img = inp_img.copy()
     img_w, img_h = img.shape
     img_area = img_w * img_h
     blurred = cv2.GaussianBlur(img, (5, 5), 0)
@@ -38,21 +38,21 @@ def find_rectangles(img):
     dilated_image = cv2.dilate(edges, kernel, iterations=2)"""
     # detect contours
     contours, _ = cv2.findContours(
-        edges.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE
-    )
+        edges.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     approx = None
     rectangles = []
+    # Iterate through found contours and only store rectangles
     for contour in contours:
         epsilon = 0.04 * cv2.arcLength(contour, True)
         approx = cv2.approxPolyDP(contour, epsilon, True)
         num_sides = len(approx)
         if(num_sides == 4):
-            #x, y, w, h = cv2.boundingRect(approx)
+            # ignore small rectangles
             rect1 = cv2.minAreaRect(approx)
             width, height = rect1[1]
             rect_area = width * height
             if rect_area > img_area/10:
-                #rectangles.append(cv2.boxPoints(rect1))
+                # ignore rectangles on picture border
                 if points_on_border(rect1, img.shape) <= 2:
                     rectangles.append(rect1)
     if rectangles.count == 0:
@@ -70,7 +70,7 @@ def check_input_parameters(input_vec):
 
 
 def img_adapt_for_placement_rec(img, thresh):
-    # Sehr unscharf machen, damit Text nicht mehr als Formen erkannt wird.
+    # Sehr unscharf machen, damit Text weniger mehr als Formen erkannt wird.
     kernel = np.ones([5,5])/25      # 5x5-Feld Durchschnitt
     adapted_img = cv2.filter2D(img,-1,kernel)
     adapted_img[adapted_img > thresh]=255

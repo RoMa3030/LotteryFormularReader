@@ -15,6 +15,7 @@ namespace LotteryFormularReader
     {
         List<int> LastClickedCell = new List<int>() { 0, 0 };
         private bool MultiCellEditModeActive = false;
+        private bool UsePhoneCam = false;
 
         // default paths = paths for Roger's PC
         private string PythonPath = "C:\\Users\\Roger Mattle\\AppData\\Local\\Programs\\Python\\Python311\\python.exe";
@@ -128,8 +129,9 @@ namespace LotteryFormularReader
         private void ProcessPicture(string PicturePath = "")
         {
             // On valid selection run python code and write results in table
+            List<string> args = new List<string>() { PicturePath };
             string ScriptPath = TextRecoPath;
-            string ResultString = RunPythonScript(ScriptPath, PicturePath);
+            string ResultString = RunPythonScript(ScriptPath, args);
             if(ResultString.Substring(0,5) != "ERROR")
             {
                 List<GuessEntry> Guesses = EntriesParser(ResultString);
@@ -156,11 +158,19 @@ namespace LotteryFormularReader
 
         private void ShootNewPicture()
         {
+            int cam_nr = 0;
+            if (isPhoneCamServerRunning() && UsePhoneCam)
+            {
+                cam_nr = 1;
+            }
+
             string ScriptPath = PhotoPath;
             string PicturePath = Path.GetTempPath();
             PicturePath += "NewImg.png";
-
-            RunPythonScript(ScriptPath, PicturePath);
+            List<string> parameters = new List<string>();
+            parameters.Add(PicturePath);
+            parameters.Add(cam_nr.ToString());
+            RunPythonScript(ScriptPath, parameters);
 
             //ProcessPicture(PicturePath);
             PictureDisplay PreviewWindow = new PictureDisplay(PicturePath);
@@ -294,16 +304,22 @@ namespace LotteryFormularReader
         #endregion
 
         #region PythonInterface
-        private string RunPythonScript(string ScriptPath, string arg = "")
+        private string RunPythonScript(string ScriptPath, List<string> inp_args)
         {
             string pythonInterpreter = PythonPath;
-            string pythonScript = ScriptPath;
+
+            StringBuilder argsBuilder = new StringBuilder();
+            argsBuilder.Append($"\"{ScriptPath}\"");
+            foreach (string arg in inp_args)
+            {
+                argsBuilder.Append($" \"{arg}\"");
+            }
+            string args = argsBuilder.ToString();
 
             // Create a ProcessStartInfo object to configure the process
             ProcessStartInfo startInfo = new ProcessStartInfo();
             startInfo.FileName = pythonInterpreter;         // Set the filename (Python interpreter)
-            //startInfo.Arguments = pythonScript;             // Set the arguments (Python script)
-            startInfo.Arguments = $"\"{pythonScript}\" \"{arg}\"";
+            startInfo.Arguments = args;
             startInfo.UseShellExecute = false;              // Ensure that we can redirect input/output
             startInfo.RedirectStandardOutput = true;        // Redirect standard output
             startInfo.RedirectStandardError = true; //GPT
@@ -430,6 +446,14 @@ namespace LotteryFormularReader
         }
         #endregion
 
+
+        private bool isPhoneCamServerRunning()
+        {
+            // Check if the iRuin Webcam Server process is running
+            Process[] processes = Process.GetProcessesByName("adb");
+            return processes.Length > 0;
+        }
+
         private void bt_Settings_Click(object sender, EventArgs e)
         {
             Settings SettingsPage = new Settings();
@@ -442,17 +466,25 @@ namespace LotteryFormularReader
                 this.Enabled = true;
                 if(SettingsPage.OutputConfirmed == true)
                 {
-                    if (SettingsPage.PythonPath != null)
+                    if (SettingsPage.PythonPath != "")
                     {
                         PythonPath = SettingsPage.PythonPath;
                     }
-                    if (SettingsPage.TextRecoPath != null)
+                    if (SettingsPage.TextRecoPath != "")
                     {
                         TextRecoPath = SettingsPage.TextRecoPath;
                     }
-                    if (SettingsPage.PhotoPath != null)
+                    if (SettingsPage.PhotoPath != "")
                     {
                         PhotoPath = SettingsPage.PhotoPath;
+                    }
+                    if (SettingsPage.UsePhoneCam)
+                    {
+                        UsePhoneCam = true;
+                    }
+                    else
+                    {
+                        UsePhoneCam = false;
                     }
                 }
             };

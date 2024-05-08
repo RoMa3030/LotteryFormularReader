@@ -5,6 +5,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|c:\\fhgr_programme\\lotteryformularreader\\lotteryformularreader\\lotteryformularreader\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|solutionrelative:lotteryformularreader\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|c:\\fhgr_programme\\lotteryformularreader\\lotteryformularreader\\lotteryformularreader\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|solutionrelative:lotteryformularreader\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|c:\\fhgr_programme\\lotteryformularreader\\lotteryformularreader\\lotteryformularreader\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{CDB8A6D3-EB6B-4AE7-99E9-CB4EDD8C33FC}|LotteryFormularReader\\LotteryFormularReader.csproj|solutionrelative:lotteryformularreader\\settings.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +22,33 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Settings.cs",
+              "DocumentMoniker": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\Settings.cs",
+              "RelativeDocumentMoniker": "LotteryFormularReader\\Settings.cs",
+              "ToolTip": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\Settings.cs",
+              "RelativeToolTip": "LotteryFormularReader\\Settings.cs",
+              "ViewState": "AQIAACoAAAAAAAAAAAAMwEIAAAAQAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-08T11:17:25.405Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Settings.cs [Design]",
+              "DocumentMoniker": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\Settings.cs",
+              "RelativeDocumentMoniker": "LotteryFormularReader\\Settings.cs",
+              "ToolTip": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\Settings.cs [Design]",
+              "RelativeToolTip": "LotteryFormularReader\\Settings.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-08T10:57:53.442Z",
+              "EditorCaption": " [Design]"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,9 +57,9 @@
               "RelativeDocumentMoniker": "LotteryFormularReader\\MainScreen.cs",
               "ToolTip": "C:\\FHGR_Programme\\LotteryFormularReader\\LotteryFormularReader\\LotteryFormularReader\\MainScreen.cs",
               "RelativeToolTip": "LotteryFormularReader\\MainScreen.cs",
-              "ViewState": "AQIAAB4AAAAAAAAAAAAvwCkAAAAMAAAA",
+              "ViewState": "AQIAAJwAAAAAAAAAAAAAAL0AAAAnAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-05-02T11:39:49.965Z",
+              "WhenOpened": "2024-05-08T09:08:09.407Z",
               "EditorCaption": ""
             }
           ]
